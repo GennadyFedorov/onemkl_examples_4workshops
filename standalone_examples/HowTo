@@ -1,0 +1,18 @@
+dgemm_usm_test.cpp  --  dgemm dpcpp (oneapi::mkl::blas::gemm) test to execute on CPU/GPU devices and measure the performance of the square matrixes.
+how to build:
+chmod +x makefile
+make usm 
+or 
+make verbose
+-------------------------------
+Example, LinOS: 
+$ make test
+dpcpp -w -w -fsycl -DMKL_ILP64  -I"/opt/intel/oneapi/mkl/2023.1.0/include"  dgemm_usm_test.cpp  -o usm.x -L/opt/intel/oneapi/mkl/2023.1.0/lib/intel64 -lmkl_sycl -lmkl_intel_ilp64 -lmkl_tbb_thread -lmkl_core -lsycl -lOpenCL -lpthread -lm -ldl
+
+how to run: 
+MKL_VERBOSE=2 ./usm.x 1240 0
+MKL_VERBOSE oneMKL 2023.0 Update 1 Product build 20230303 for Intel(R) 64 architecture Intel(R) Advanced Vector Extensions 512 (Intel(R) AVX-512) with support of Intel(R) Deep Learning Boost (Intel(R) DL Boost), EVEX-encoded AES and Carry-Less Multiplication Quadword instructions, Lnx 2.40GHz ilp64 tbb_thread
+MKL_VERBOSE DGEMM(T,N,1240,1240,1240,0x146b6c2efbd8,0x146ac4037000,1240,0x1469bf444000,1240,0x146b6c2efbe0,0x1469be888000,1240) 2.87ms CNR:OFF Dyn:1 FastMM:1
+.....
+size == 1240, GFlops  == 1794.662
+----------------------------------
